@@ -1,4 +1,5 @@
-import '@/styles/globals.css'
+import "@/styles/globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata = {
   title: "Create Next App",
@@ -11,8 +12,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja">
-      <body className="">{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="ja">
+        <body className="">{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
