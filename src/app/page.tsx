@@ -1,6 +1,14 @@
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import {
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  currentUser,
+} from "@clerk/nextjs";
 
-export default function Home() {
+export default async function Home() {
+  const user = await currentUser();
+
   return (
     <>
       <header
@@ -20,7 +28,10 @@ export default function Home() {
           <SignInButton />
         </SignedOut>
       </header>
-      <main className="text-lg">テストページ</main>
+      <main className="text-lg">
+        <SignedIn><div>{user?.firstName}</div></SignedIn>
+        <SignedIn><div>{JSON.stringify(user?.privateMetadata)}</div></SignedIn>
+      </main>
     </>
   );
 }
